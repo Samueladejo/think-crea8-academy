@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thinkcrea8 Tech Academy — Think Beyond Learning. Create Your Future.</title>
+<meta name="description" content="Thinkcrea8 Tech Academy — a mentorship-driven technology academy teaching Design, Video Editing, Generative AI and Web Development." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#2563EB;
+    --primary-dark:#1d4ed8;
+    --navy:#0F172A;
+    --cyan:#06B6D4;
+    --bg:#FFFFFF;
+    --card:#F8FAFC;
+    --text:#1E293B;
+    --text-muted:#64748B;
+    --border:#E2E8F0;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.06);
+    --shadow-md: 0 4px 12px rgba(15,23,42,0.06), 0 2px 4px rgba(15,23,42,0.04);
+    --shadow-lg: 0 20px 40px -12px rgba(15,23,42,0.15);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-0.02em;color:var(--navy);}
+  p{margin:0;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:6px;}
+
+  /* ---------- Navbar ---------- */
+  .navbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, box-shadow .3s ease, background .3s ease;
+  }
+  .navbar.scrolled{ border-bottom:1px solid var(--border); box-shadow:var(--shadow-sm); }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{font-weight:800;font-size:19px;color:var(--navy);display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--cyan));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:15px;flex-shrink:0;}
+  .nav-links{display:flex;gap:8px;list-style:none;margin:0;padding:0;align-items:center;}
+  .nav-links a{ padding:10px 16px;border-radius:99px;font-weight:500;font-size:14.5px;color:var(--text); transition:background .2s ease, color .2s ease; }
+  .nav-links a:hover{background:var(--card);color:var(--primary);}
+  .nav-cta{ background:var(--navy);color:white !important;padding:10px 20px;border-radius:99px;font-weight:600;font-size:14.5px; transition:transform .18s ease, background .2s ease; border:none; }
+  .nav-cta:hover{background:var(--primary);transform:translateY(-1px);}
+  .hamburger{display:none;background:none;border:none;padding:8px;color:var(--navy);}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 20px;border-top:1px solid var(--border);background:white;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 8px;font-weight:500;border-radius:8px;}
+  .mobile-menu a:hover{background:var(--card);}
+  @media (max-width:860px){ .nav-links{display:none;} .hamburger{display:flex;} }
+
+  section{padding:112px 0;}
+  .eyebrow{ display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--primary); background:rgba(37,99,235,0.08);padding:6px 14px;border-radius:99px;margin-bottom:20px;letter-spacing:.02em; }
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,4vw,40px);line-height:1.15;margin-bottom:16px;}
+  .section-head p{color:var(--text-muted);font-size:17px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .hero{ position:relative;overflow:hidden;padding:96px 0 100px; }
+  .hero-bg{ position:absolute;inset:0;z-index:0;pointer-events:none; }
+  .hero-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;}
+  .hero-blob.b1{width:480px;height:480px;background:var(--primary);top:-180px;right:-120px;}
+  .hero-blob.b2{width:380px;height:380px;background:var(--cyan);bottom:-160px;left:-100px;opacity:.25;}
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+  .hero-copy h1{font-size:clamp(36px,5.4vw,58px);line-height:1.08;margin-bottom:22px;}
+  .hero-copy .accent{color:var(--primary);}
+  .hero-copy p.sub{font-size:18px;color:var(--text-muted);max-width:520px;margin-bottom:36px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{ display:inline-flex;align-items:center;justify-content:center;gap:8px; padding:15px 26px;border-radius:99px;font-weight:600;font-size:15px;border:none; transition:transform .18s ease, box-shadow .18s ease, background .18s ease; }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--primary);color:white;box-shadow:0 8px 20px -6px rgba(37,99,235,0.5);}
+  .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 12px 24px -6px rgba(37,99,235,0.55);}
+  .btn-secondary{background:white;color:var(--navy);border:1.5px solid var(--border);}
+  .btn-secondary:hover{border-color:var(--navy);transform:translateY(-2px);}
+  .btn-block{width:100%;}
+
+  .hero-visual{position:relative;height:460px;}
+  .hero-illustration{position:absolute;inset:0;}
+  .float-card{ position:absolute;background:white;border:1px solid var(--border);border-radius:var(--radius-md); box-shadow:var(--shadow-lg);padding:14px 18px;display:flex;align-items:center;gap:10px; font-weight:600;font-size:14px;color:var(--navy);animation:float 6s ease-in-out infinite; }
+  .float-card .ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;}
+  .fc1{top:6%;left:0%;animation-delay:0s;} .fc1 .ic{background:linear-gradient(135deg,#2563EB,#06B6D4);}
+  .fc2{top:34%;right:-2%;animation-delay:1.4s;} .fc2 .ic{background:linear-gradient(135deg,#0F172A,#2563EB);}
+  .fc3{bottom:16%;left:4%;animation-delay:2.6s;} .fc3 .ic{background:linear-gradient(135deg,#06B6D4,#2563EB);}
+  .fc4{bottom:-2%;right:12%;animation-delay:3.8s;} .fc4 .ic{background:linear-gradient(135deg,#2563EB,#0F172A);}
+  @keyframes float{ 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-14px);} }
+  @media (max-width:960px){ .hero-inner{grid-template-columns:1fr;} .hero-visual{height:340px;order:-1;} }
+  @media (max-width:520px){ .hero-actions{flex-direction:column;} .btn{width:100%;} }
+
+  .about{background:var(--card);}
+  .about-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
+  .about-visual{ border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--navy),#1e3a8a);aspect-ratio:1/1;position:relative;overflow:hidden;box-shadow:var(--shadow-lg); }
+  .about-visual svg{position:absolute;inset:0;width:100%;height:100%;}
+  .about-copy p{color:var(--text-muted);font-size:16.5px;margin-bottom:18px;}
+  .about-copy p:last-child{margin-bottom:0;}
+  .about-copy strong{color:var(--navy);}
+  @media (max-width:860px){.about-inner{grid-template-columns:1fr;}.about-visual{aspect-ratio:16/9;order:-1;}}
+
+  .grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .why-card{ background:white;border:1px solid var(--border);border-radius:var(--radius-md);padding:28px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .why-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent;}
+  .why-card .ic{width:46px;height:46px;border-radius:12px;background:rgba(37,99,235,0.08);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .why-card h3{font-size:17.5px;margin-bottom:8px;}
+  .why-card p{color:var(--text-muted);font-size:14.5px;}
+  @media (max-width:900px){.grid-6{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.grid-6{grid-template-columns:1fr;}}
+
+  .programs-bg{background:var(--navy);}
+  .programs-bg .section-head h2{color:white;}
+  .programs-bg .section-head p{color:#94A3B8;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .prog-card{ background:#141F38;border:1px solid #223052;border-radius:var(--radius-md);padding:26px;color:white; transition:transform .25s ease, border-color .25s ease, background .25s ease; display:flex;flex-direction:column; }
+  .prog-card:hover{transform:translateY(-6px);border-color:var(--cyan);background:#182648;}
+  .prog-card .ic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--cyan));display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:white;}
+  .prog-card h3{color:white;font-size:18px;margin-bottom:8px;}
+  .prog-card p.desc{color:#94A3B8;font-size:14px;margin-bottom:20px;flex-grow:1;}
+  .prog-meta{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid #223052;}
+  .duration{font-size:13px;color:#94A3B8;font-weight:500;}
+  .badge{font-size:11.5px;font-weight:700;background:rgba(6,182,212,0.15);color:var(--cyan);padding:5px 10px;border-radius:99px;}
+  .prog-register{margin-top:16px;background:transparent;border:1.5px solid #334568;color:white;}
+  .prog-register:hover{border-color:var(--navy);background:rgba(255,255,255,0.06);}
+  @media (max-width:960px){.grid-4{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.grid-4{grid-template-columns:1fr;}}
+
+  .mentor-inner{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+  .mentor-list{display:flex;flex-direction:column;gap:20px;margin-top:12px;}
+  .mentor-item{display:flex;gap:14px;align-items:flex-start;}
+  .mentor-item .dot{width:22px;height:22px;border-radius:50%;background:rgba(37,99,235,0.1);border:2px solid var(--primary);flex-shrink:0;margin-top:2px;}
+  .mentor-item p{font-weight:600;color:var(--navy);font-size:15.5px;}
+  .flow{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;}
+  .flow-step{ display:flex;align-items:center;gap:16px;padding:18px 20px;background:white;border:1px solid var(--border); border-radius:var(--radius-sm);font-weight:700;color:var(--navy);font-size:15px;box-shadow:var(--shadow-sm); }
+  .flow-step .n{width:32px;height:32px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+  .flow-step.launch{background:linear-gradient(135deg,var(--primary),var(--cyan));color:white;border:none;}
+  .flow-step.launch .n{background:rgba(255,255,255,0.25);color:white;}
+  .flow-connector{width:2px;height:26px;background:var(--border);margin-left:36px;}
+  @media (max-width:860px){.mentor-inner{grid-template-columns:1fr;}}
+
+  .cta{ background:linear-gradient(135deg,var(--navy) 0%, #1e2a4a 60%, #17324f 100%); text-align:center;position:relative;overflow:hidden; }
+  .cta::before{ content:"";position:absolute;width:600px;height:600px;border-radius:50%; background:radial-gradient(circle, rgba(6,182,212,0.18), transparent 70%); top:-260px;left:50%;transform:translateX(-50%); }
+  .cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+  .cta h2{color:white;font-size:clamp(28px,4.5vw,42px);margin-bottom:16px;}
+  .cta p{color:#94A3B8;font-size:17px;margin-bottom:36px;}
+
+  footer{background:var(--navy);color:#94A3B8;padding:64px 0 28px;}
+  .footer-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px;}
+  .footer-brand h3{color:white;font-size:19px;margin-bottom:6px;}
+  .footer-brand p.tag{color:var(--cyan);font-weight:600;font-size:13.5px;margin-bottom:16px;}
+  .footer-contact p{font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-links a{font-size:14px;}
+  .footer-links a:hover{color:white;}
+  .social-row{display:flex;gap:10px;margin-top:18px;}
+  .social-row a{ width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center; justify-content:center;color:white;transition:background .2s ease, transform .2s ease; }
+  .social-row a:hover{background:var(--primary);transform:translateY(-2px);} 
+  .footer-map{margin-top:16px}
+  .footer-map iframe{width:320px;height:200px;border:0;border-radius:10px;display:block}
+  @media (max-width:640px){.footer-map iframe{width:100%;height:220px}}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  @media (max-width:640px){.footer-bottom{flex-direction:column;text-align:center;}}
+
+  .modal-overlay{ position:fixed;inset:0;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px); display:none;align-items:center;justify-content:center;z-index:1000;padding:20px; animation:fadeIn .2s ease; }
+  .modal-overlay.open{display:flex;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .modal{ background:white;border-radius:var(--radius-lg);max-width:520px;width:100%;max-height:90vh;overflow-y:auto; padding:36px;box-shadow:var(--shadow-lg);animation:slideUp .25s ease; }
+  @keyframes slideUp{from{opacity:0;transform:translateY(18px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+  .modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+  .modal-head h3{font-size:22px;}
+  .modal-close{background:var(--card);border:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);flex-shrink:0;}
+  .modal-close:hover{background:var(--border);color:var(--navy);}
+  .modal p.lead{color:var(--text-muted);font-size:14.5px;margin-bottom:26px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:7px;}
+  .field input, .field select, .field textarea{ width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14.5px; font-family:inherit;color:var(--text);background:white;transition:border-color .18s ease, box-shadow .18s ease; }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,0.12); }
+  .field textarea{resize:vertical;min-height:90px;}
+  .field.error input, .field.error select, .field.error textarea{border-color:#DC2626;}
+  .error-msg{color:#DC2626;font-size:12.5px;font-weight:600;margin-top:6px;display:none;}
+  .field.error .error-msg{display:block;}
+  .success-box{text-align:center;padding:20px 4px;display:none;}
+  .success-box.show{display:block;}
+  .success-box .check{width:56px;height:56px;border-radius:50%;background:rgba(6,182,212,0.12);color:var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+  .success-box h3{margin-bottom:8px;}
+  .success-box p{color:var(--text-muted);font-size:14.5px;margin-bottom:24px;}
+  .reg-form.hide, .modal-lead.hide{display:none;}
+
+  /* ---------- Testimonials ---------- */
+  .testimonials{padding:96px 0;background:linear-gradient(180deg,rgba(248,250,252,0.9),transparent 40%);}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px;align-items:start;}
+  .test-card{background:white;border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow-sm);display:flex;gap:14px;align-items:flex-start;}
+  .test-card .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--cyan));color:white;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .test-card .meta{flex:1}
+  .test-card .quote{font-size:15px;color:var(--text);margin-bottom:10px;font-weight:600}
+  .test-card .who{font-size:14px;color:var(--text-muted);font-weight:700}
+  .test-card .skill{font-size:13px;color:#94A3B8;margin-top:6px}
+  .stars{color:#F59E0B;margin-bottom:8px}
+  @media (max-width:980px){.test-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){.test-grid{grid-template-columns:1fr;} .test-card{padding:18px}}
+
+  /* ---------- Carousel styles ---------- */
+  .carousel{position:relative;margin-top:18px}
+  .carousel-viewport{overflow:hidden}
+  .carousel-track{display:flex;gap:20px;transition:transform .45s cubic-bezier(.2,.9,.2,1);will-change:transform;padding-bottom:6px}
+  .carousel-slide{min-width:calc(33.333% - 13.333px);box-sizing:border-box}
+  .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:1px solid var(--border);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow-sm)}
+  .carousel-btn.prev{left:6px}
+  .carousel-btn.next{right:6px}
+  .carousel-btn:hover{transform:translateY(-50%) scale(1.04)}
+  .carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+  .carousel-dot{width:10px;height:10px;border-radius:99px;background:#CBD5E1;cursor:pointer}
+  .carousel-dot.active{background:var(--primary)}
+  @media (max-width:980px){.carousel-slide{min-width:calc(50% - 10px)}}
+  @media (max-width:560px){.carousel-slide{min-width:100%}.carousel-btn{width:36px;height:36px}}
+
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo" data-scroll="#home">
+      <span class="logo-mark">T8</span>
+      Thinkcrea8 <span class="visually-hidden">Tech Academy</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" data-scroll="#home">Home</a></li>
+      <li><a href="#about" data-scroll="#about">About</a></li>
+      <li><a href="#programs" data-scroll="#programs">Programs</a></li>
+      <li><a href="#mentorship" data-scroll="#mentorship">Mentorship</a></li>
+      <li><a href="#register" class="nav-cta" id="navRegister">Register</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+      <svg id="hamburgerIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" data-scroll="#home">Home</a>
+    <a href="#about" data-scroll="#about">About</a>
+    <a href="#programs" data-scroll="#programs">Programs</a>
+    <a href="#mentorship" data-scroll="#mentorship">Mentorship</a>
+    <a href="#register" id="mobileRegister">Register</a>
+  </div>
+</nav>
+
+<main>
+
+  <section id="home" class="hero">
+    <div class="hero-bg"><div class="hero-blob b1"></div><div class="hero-blob b2"></div></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="reveal">
+          <h1>Think Beyond Learning.<br><span class="accent">Create Your Future.</span></h1>
+        </div>
+        <div class="reveal" style="transition-delay:100ms">
+          <p class="sub">Learn practical digital skills through close mentorship, hands-on projects, and real-world experience that prepares you for employment, freelancing, and entrepreneurship.</p>
+        </div>
+        <div class="reveal" style="transition-delay:200ms">
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="heroRegister">
+              Register for August Cohort
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn btn-secondary" href="#programs" data-scroll="#programs">Explore Programs</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-illustration reveal" style="transition-delay:150ms">
+          <svg viewBox="0 0 420 420" width="100%" height="100%" role="img" aria-label="Illustration of a student learning at a laptop">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <circle cx="210" cy="210" r="170" fill="#F8FAFC"/>
+            <rect x="110" y="220" width="200" height="120" rx="14" fill="#0F172A"/>
+            <rect x="122" y="232" width="176" height="86" rx="4" fill="url(#g1)" opacity="0.9"/>
+            <rect x="150" y="340" width="120" height="12" rx="6" fill="#CBD5E1"/>
+            <circle cx="210" cy="150" r="34" fill="#0F172A"/>
+            <path d="M160 220c0-30 22-52 50-52s50 22 50 52" fill="#0F172A"/>
+            <g opacity="0.9">
+              <rect x="150" y="255" width="34" height="6" rx="3" fill="white" opacity="0.8"/>
+              <rect x="150" y="267" width="60" height="6" rx="3" fill="white" opacity="0.6"/>
+              <rect x="150" y="279" width="46" height="6" rx="3" fill="white" opacity="0.6"/>
+            </g>
+            <circle cx="90" cy="120" r="10" fill="#06B6D4"/>
+            <circle cx="330" cy="100" r="7" fill="#2563EB"/>
+            <circle cx="340" cy="300" r="9" fill="#06B6D4"/>
+            <rect x="70" y="260" width="16" height="16" rx="4" fill="#2563EB" transform="rotate(20 78 268)"/>
+          </svg>
+        </div>
+        <div class="float-card fc1"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.9 4.9l2.8 2.8"/><path d="M16.3 16.3l2.8 2.8"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.9 19.1l2.8-2.8"/><path d="M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg></span>AI</div>
+        <div class="float-card fc2"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1-.3-.3-.4-.6-.4-1 0-.8.7-1.5 1.5-1.5H16c3.3 0 6-2.7 6-6 0-4.9-4.5-9-10-9z"/></svg></span>Design</div>
+        <div class="float-card fc3"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></span>Web Development</div>
+        <div class="float-card fc4"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="M22 8.5l-6 3.5 6 3.5v-7z"/></svg></span>Video Editing</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container about-inner">
+      <div class="about-visual reveal">
+        <svg viewBox="0 0 400 400" width="100%" height="100%" role="img" aria-label="Abstract mentorship illustration">
+          <defs>
+            <radialGradient id="g2" cx="30%" cy="20%" r="80%">
+              <stop offset="0%" stop-color="#2563EB" stop-opacity="0.5"/><stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="400" fill="url(#g2)"/>
+          <circle cx="150" cy="180" r="50" fill="#2563EB" opacity="0.85"/>
+          <circle cx="260" cy="240" r="34" fill="#06B6D4" opacity="0.85"/>
+          <path d="M150 230 L260 240" stroke="white" stroke-width="2" stroke-dasharray="4 6" opacity="0.5"/>
+          <circle cx="300" cy="120" r="4" fill="#06B6D4"/>
+          <circle cx="90" cy="300" r="5" fill="#2563EB"/>
+          <circle cx="320" cy="310" r="6" fill="white" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="about-copy reveal" style="transition-delay:100ms">
+        <div class="eyebrow">About Us</div>
+        <h2 style="margin-bottom:20px;font-size:clamp(26px,3.6vw,36px)">About Thinkcrea8 Tech Academy</h2>
+        <p>Thinkcrea8 Tech Academy is a <strong>mentorship-driven technology academy</strong> dedicated to helping young people and professionals acquire practical digital skills that lead to real opportunities.</p>
+        <p>We believe education should go beyond certificates.</p>
+        <p>Students learn by <strong>building real projects</strong>, receiving personalized mentorship, and developing the confidence to succeed in today's digital economy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" style="margin:0 auto 20px">Why Choose Us</div>
+        <h2>Built around you, not a syllabus</h2>
+        <p>Six reasons students choose Thinkcrea8 for their tech journey.</p>
+      </div>
+      <div class="grid-6" id="whyGrid"></div>
+    </div>
+  </section>
+
+  <section id="programs" class="programs-bg">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Our Programs</div>
+        <h2>Skills that open real doors</h2>
+        <p>Four beginner-friendly tracks, each built around hands-on, project-based mentorship.</p>
+      </div>
+      <div class="grid-4" id="programsGrid"></div>
+    </div>
+  </section>
+
+  <section id="mentorship">
+    <div class="container mentor-inner">
+      <div class="reveal">
+        <div class="eyebrow">Our Mentorship Model</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px);margin-bottom:16px;line-height:1.15">Learning Doesn't End When Class Ends</h2>
+        <p style="color:var(--text-muted);font-size:16.5px">Every student is paired with structured, ongoing support long after the lesson is over.</p>
+        <div class="mentor-list" id="mentorList"></div>
+      </div>
+      <div class="flow reveal" id="flow" style="transition-delay:120ms"></div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" style="margin:0 auto 20px">Testimonials</div>
+        <h2>What our students say</h2>
+        <p>Real feedback from recent graduates.</p>
+      </div>
+      <div class="carousel">
+        <button class="carousel-btn prev" aria-label="Previous">‹</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <div class="carousel-slide reveal">
+              <article class="test-card">
+                <div class="avatar">AB</div>
+                <div class="meta">
+                  <div class="stars">★★★★★</div>
+                  <div class="quote">"The mentorship and project work transformed my portfolio — I landed freelance clients within weeks."</div>
+                  <div class="who">Aisha Bello — Graphic Design Graduate</div>
+                  <div class="skill">Graphic Design</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="carousel-slide reveal">
+              <article class="test-card">
+                <div class="avatar">TO</div>
+                <div class="meta">
+                  <div class="stars">★★★★★</div>
+                  <div class="quote">"Hands-on web projects and code reviews made me confident to apply for developer roles."</div>
+                  <div class="who">Tunde Okafor — Web Developer</div>
+                  <div class="skill">Web Development</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="carousel-slide reveal">
+              <article class="test-card">
+                <div class="avatar">CA</div>
+                <div class="meta">
+                  <div class="stars">★★★★★</div>
+                  <div class="quote">"Video Editing track taught practical workflows — my content quality improved drastically."</div>
+                  <div class="who">Chioma Ade — Video Editor</div>
+                  <div class="skill">Video Editing</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="carousel-slide reveal">
+              <article class="test-card">
+                <div class="avatar">EN</div>
+                <div class="meta">
+                  <div class="stars">★★★★★</div>
+                  <div class="quote">"Generative AI tools we built are now part of my freelancing toolkit — great mentorship."</div>
+                  <div class="who">Emeka Nwosu — AI Tools Creator</div>
+                  <div class="skill">Generative AI</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="carousel-slide reveal">
+              <article class="test-card">
+                <div class="avatar">MY</div>
+                <div class="meta">
+                  <div class="stars">★★★★★</div>
+                  <div class="quote">"The program helped me build real products and a hiring-ready portfolio."</div>
+                  <div class="who">Maryam Yusuf — Full‑stack Graduate</div>
+                  <div class="skill">Web Development</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Next">›</button>
+        <div class="carousel-dots" aria-hidden="false"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="register" class="cta">
+    <div class="container cta-inner reveal">
+      <h2>Ready to Begin Your Tech Journey?</h2>
+      <p>Spots for the August Cohort are limited. Reserve yours and get matched with a mentor.</p>
+      <button class="btn btn-primary" id="ctaRegister">
+        Register Now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Thinkcrea8 Tech Academy</h3>
+        <p class="tag">Think. Create. Innovate.</p>
+        <div class="footer-contact">
+          <p><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .36 1.98.68 2.92a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.16-1.16a2 2 0 0 1 2.11-.45c.94.32 1.92.55 2.92.68A2 2 0 0 1 22 16.92z"/></svg> +234 805 279 8226</p>
+          <p><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg> hello@thinkcrea8academy.com</p>
+        </div>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9h4v2a4 4 0 0 1 4-2c3 0 4 2 4 5v7h-4v-6c0-1.5-.5-2.5-2-2.5s-2 1-2 2.5v6h-4z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-map">
+        <h4 style="color:white;font-size:14px;margin-bottom:8px;font-weight:700">Visit Us</h4>
+        <p style="color:#94A3B8;margin-bottom:8px">Keffi, Nasarawa State</p>
+        <iframe src="https://www.google.com/maps?q=Keffi,+Nasarawa+State&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map showing Keffi, Nasarawa State"></iframe>
+      </div>
+      <div>
+        <h4 style="color:white;font-size:14px;margin-bottom:14px;font-weight:700">Explore</h4>
+        <div class="footer-links">
+          <a href="#home" data-scroll="#home">Home</a>
+          <a href="#about" data-scroll="#about">About</a>
+          <a href="#programs" data-scroll="#programs">Programs</a>
+          <a href="#mentorship" data-scroll="#mentorship">Mentorship</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Thinkcrea8 Tech Academy.</span>
+      <span>All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <h3 id="modal-title">Register Now</h3>
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close registration form">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="lead modal-lead">Fill in your details — we'll open WhatsApp with your registration ready to send.</p>
+    <form id="regForm" class="reg-form" novalidate>
+      <div class="field" id="field-name">
+        <label for="f-name">Full Name</label>
+        <input id="f-name" type="text" autocomplete="name">
+        <p class="error-msg">Please enter your full name.</p>
+      </div>
+      <div class="field" id="field-phone">
+        <label for="f-phone">Phone Number</label>
+        <input id="f-phone" type="tel" placeholder="e.g. 0805 279 8226" autocomplete="tel">
+        <p class="error-msg">Enter a valid phone number.</p>
+      </div>
+      <div class="field" id="field-address">
+        <label for="f-address">Home Address</label>
+        <input id="f-address" type="text" autocomplete="street-address">
+        <p class="error-msg">Please enter your home address.</p>
+      </div>
+      <div class="field" id="field-skill">
+        <label for="f-skill">Select Skill</label>
+        <select id="f-skill">
+          <option value="">Choose a skill…</option>
+          <option>Graphic Design</option>
+          <option>Video Editing</option>
+          <option>Generative AI</option>
+          <option>Web Development</option>
+        </select>
+        <p class="error-msg">Please select a skill.</p>
+      </div>
+      <div class="field" id="field-exp">
+        <label for="f-exp">What do you expect from this program?</label>
+        <textarea id="f-exp"></textarea>
+        <p class="error-msg">Tell us what you expect from the program.</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit &amp; Continue on WhatsApp</button>
+    </form>
+    <div class="success-box" id="successBox">
+      <div class="check"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Message ready on WhatsApp</h3>
+      <p>We opened WhatsApp with your details filled in — just hit send and our team will confirm your spot in the August Cohort.</p>
+      <button class="btn btn-primary btn-block" id="doneBtn">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Data ---------- */
+  var WHY = [
+    {icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', title:"Close Mentorship", desc:"Small cohorts with personalized guidance."},
+    {icon:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/>', title:"Project-Based Learning", desc:"Build real projects every week."},
+    {icon:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>', title:"Career Development", desc:"Portfolio building and career guidance."},
+    {icon:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>', title:"Industry Relevant Skills", desc:"Courses aligned with current market needs."},
+    {icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', title:"Community", desc:"Join a lifelong network of learners."},
+    {icon:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', title:"Practical Learning", desc:"Less theory. More doing."}
+  ];
+
+  var PROGRAMS = [
+    {icon:'<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1-.3-.3-.4-.6-.4-1 0-.8.7-1.5 1.5-1.5H16c3.3 0 6-2.7 6-6 0-4.9-4.5-9-10-9z"/>', title:"Graphic Design", desc:"Master visual storytelling with modern design tools and real client-style briefs.", duration:"8 weeks"},
+    {icon:'<rect x="2" y="5" width="14" height="14" rx="2"/><path d="M22 8.5l-6 3.5 6 3.5v-7z"/>', title:"Video Editing", desc:"Edit and produce professional videos for content, brands, and social media.", duration:"6 weeks"},
+    {icon:'<path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.9 4.9l2.8 2.8"/><path d="M16.3 16.3l2.8 2.8"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.9 19.1l2.8-2.8"/><path d="M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/>', title:"Generative AI", desc:"Learn to build and apply AI tools for content, automation, and products.", duration:"8 weeks"},
+    {icon:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/>', title:"Web Development", desc:"Build real websites and apps with modern frontend and backend skills.", duration:"12 weeks"}
+  ];
+
+  var MENTOR_POINTS = ["Weekly mentorship","Assignment reviews","Career guidance","Project feedback","Portfolio review","Networking opportunities"];
+  var FLOW = ["Learn","Practice","Build Projects","Receive Feedback","Improve","Launch Your Career"];
+  var WHATSAPP_NUMBER = "2348052798226";
+
+  /* ---------- Render grids ---------- */
+  var whyGrid = document.getElementById('whyGrid');
+  WHY.forEach(function(w, i){
+    var el = document.createElement('div');
+    el.className = 'reveal';
+    el.style.transitionDelay = (i*60) + 'ms';
+    el.innerHTML = '<div class="why-card"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+w.icon+'</svg></span><h3>'+w.title+'</h3><p>'+w.desc+'</p></div>';
+    whyGrid.appendChild(el);
+  });
+
+  var programsGrid = document.getElementById('programsGrid');
+  PROGRAMS.forEach(function(p, i){
+    var el = document.createElement('div');
+    el.className = 'reveal';
+    el.style.transitionDelay = (i*70) + 'ms';
+    el.innerHTML =
+      '<div class="prog-card">' +
+        '<span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p.icon+'</svg></span>' +
+        '<h3>'+p.title+'</h3>' +
+        '<p class="desc">'+p.desc+'</p>' +
+        '<div class="prog-meta"><span class="duration">'+p.duration+'</span><span class="badge">Beginner Friendly</span></div>' +
+        '<button type="button" class="btn prog-register" data-skill="'+p.title+'">Register for this track</button>' +
+      '</div>';
+    programsGrid.appendChild(el);
+  });
+
+  var mentorList = document.getElementById('mentorList');
+  MENTOR_POINTS.forEach(function(pt){
+    var el = document.createElement('div');
+    el.className = 'mentor-item';
+    el.innerHTML = '<span class="dot"></span><p>'+pt+'</p>';
+    mentorList.appendChild(el);
+  });
+
+  var flow = document.getElementById('flow');
+  FLOW.forEach(function(step, i){
+    var isLast = i === FLOW.length - 1;
+    var stepEl = document.createElement('div');
+    stepEl.className = 'flow-step' + (isLast ? ' launch' : '');
+    stepEl.innerHTML = '<span class="n">'+(i+1)+'</span>'+step;
+    flow.appendChild(stepEl);
+    if (!isLast) {
+      var conn = document.createElement('div');
+      conn.className = 'flow-connector';
+      flow.appendChild(conn);
+    }
+  });
+
+  /* ---------- Sticky nav ---------- */
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    navbar.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var hamburgerIcon = document.getElementById('hamburgerIcon');
+  var menuOpen = false;
+  function setMenu(open){
+    menuOpen = open;
+    mobileMenu.classList.toggle('open', open);
+    hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hamburgerBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    hamburgerIcon.innerHTML = open
+      ? '<path d="M18 6L6 18"/><path d="M6 6l12 12"/>'
+      : '<path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>';
+  }
+  hamburgerBtn.addEventListener('click', function(){ setMenu(!menuOpen); });
+
+  /* ---------- Smooth scroll ---------- */
+  document.querySelectorAll('[data-scroll]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      setMenu(false);
+      var target = document.querySelector(a.getAttribute('data-scroll'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ obs.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- Modal ---------- */
+  var overlay = document.getElementById('modalOverlay');
+  var form = document.getElementById('regForm');
+  var successBox = document.getElementById('successBox');
+  var modalLead = document.querySelector('.modal-lead');
+  var modalTitle = document.getElementById('modal-title');
+  var skillSelect = document.getElementById('f-skill');
+  var lastFocused = null;
+
+  function openModal(presetSkill){
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    form.classList.remove('hide');
+    modalLead.classList.remove('hide');
+    successBox.classList.remove('show');
+    modalTitle.textContent = 'Register Now';
+    document.body.style.overflow = 'hidden';
+    if (presetSkill) skillSelect.value = presetSkill;
+    setTimeout(function(){ document.getElementById('f-name').focus(); }, 30);
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.getElementById('heroRegister').addEventListener('click', function(){ openModal(); });
+  document.getElementById('ctaRegister').addEventListener('click', function(){ openModal(); });
+  document.getElementById('navRegister').addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  document.getElementById('mobileRegister').addEventListener('click', function(e){ e.preventDefault(); setMenu(false); openModal(); });
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  document.getElementById('doneBtn').addEventListener('click', closeModal);
+  overlay.addEventListener('mousedown', function(e){ if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+  programsGrid.addEventListener('click', function(e){
+    var btn = e.target.closest('.prog-register');
+    if (btn) openModal(btn.getAttribute('data-skill'));
+  });
+
+  /* ---------- Form validation + WhatsApp ---------- */
+  var fields = {
+    name: { input: document.getElementById('f-name'), wrap: document.getElementById('field-name'),
+      validate: function(v){ return v.trim().length > 0; } },
+    phone: { input: document.getElementById('f-phone'), wrap: document.getElementById('field-phone'),
+      validate: function(v){ return /^[0-9+\s-]{7,20}$/.test(v.trim()); } },
+    address: { input: document.getElementById('f-address'), wrap: document.getElementById('field-address'),
+      validate: function(v){ return v.trim().length > 0; } },
+    skill: { input: skillSelect, wrap: document.getElementById('field-skill'),
+      validate: function(v){ return v.trim().length > 0; } },
+    exp: { input: document.getElementById('f-exp'), wrap: document.getElementById('field-exp'),
+      validate: function(v){ return v.trim().length > 0; } }
+  };
+
+  function buildWhatsAppUrl(data){
+    var message =
+      "Hello Thinkcrea8 Tech Academy,\n\n" +
+      "My name is " + data.name + ".\n\n" +
+      "Phone Number:\n" + data.phone + "\n\n" +
+      "Address:\n" + data.address + "\n\n" +
+      "I would like to register for:\n\n" + data.skill + "\n\n" +
+      "My expectation is:\n\n" + data.exp + "\n\n" +
+      "I look forward to joining the August Cohort.";
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var valid = true;
+    var values = {};
+    Object.keys(fields).forEach(function(key){
+      var f = fields[key];
+      var v = f.input.value;
+      values[key] = v;
+      var ok = f.validate(v);
+      f.wrap.classList.toggle('error', !ok);
+      if (!ok) valid = false;
+    });
+    if (!valid) return;
+
+    var url = buildWhatsAppUrl({ name: values.name, phone: values.phone, address: values.address, skill: values.skill, exp: values.exp });
+    window.open(url, '_blank', 'noopener,noreferrer');
+
+    form.classList.add('hide');
+    modalLead.classList.add('hide');
+    successBox.classList.add('show');
+    modalTitle.textContent = "You're almost in!";
+  });
+
+})();
+</script>
+<script>
+(function(){
+  var track = document.querySelector('.carousel-track');
+  if (!track) return;
+  var slides = Array.prototype.slice.call(track.children);
+  var prev = document.querySelector('.carousel-btn.prev');
+  var next = document.querySelector('.carousel-btn.next');
+  var dotsWrap = document.querySelector('.carousel-dots');
+  var index = 0;
+  var autoplay = true;
+  var autoDelay = 4500;
+  var timer = null;
+
+  function update(){
+    var slideW = slides[0].getBoundingClientRect().width + 20; // include gap
+    track.style.transform = 'translateX(' + (-index * slideW) + 'px)';
+    Array.prototype.forEach.call(dotsWrap.children, function(d,i){ d.classList.toggle('active', i===index); });
+  }
+
+  function go(to){
+    index = (to + slides.length) % slides.length;
+    update();
+  }
+
+  function nextSlide(){
+    // move by visible count: compute visible per viewport
+    var vp = document.querySelector('.carousel-viewport').getBoundingClientRect().width;
+    var w = slides[0].getBoundingClientRect().width + 20;
+    var per = Math.max(1, Math.floor(vp / w));
+    go(index + per);
+  }
+
+  function prevSlide(){
+    var vp = document.querySelector('.carousel-viewport').getBoundingClientRect().width;
+    var w = slides[0].getBoundingClientRect().width + 20;
+    var per = Math.max(1, Math.floor(vp / w));
+    go(index - per);
+  }
+
+  // build dots for each possible page (based on per-view)
+  function rebuildDots(){
+    dotsWrap.innerHTML = '';
+    var vp = document.querySelector('.carousel-viewport').getBoundingClientRect().width;
+    var w = slides[0].getBoundingClientRect().width + 20;
+    var per = Math.max(1, Math.floor(vp / w));
+    var pages = Math.ceil(slides.length / per);
+    for(var i=0;i<pages;i++){
+      var d = document.createElement('button');
+      d.className = 'carousel-dot' + (i===0? ' active':'');
+      d.setAttribute('aria-label','Go to slide '+(i+1));
+      (function(page){ d.addEventListener('click', function(){ go(page*per); resetTimer(); }); })(i);
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  next.addEventListener('click', function(){ nextSlide(); resetTimer(); });
+  prev.addEventListener('click', function(){ prevSlide(); resetTimer(); });
+
+  function resetTimer(){
+    if (!autoplay) return;
+    clearInterval(timer);
+    timer = setInterval(nextSlide, autoDelay);
+  }
+
+  // pause on hover
+  var vpEl = document.querySelector('.carousel-viewport');
+  vpEl.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  vpEl.addEventListener('mouseleave', resetTimer);
+
+  window.addEventListener('resize', function(){
+    rebuildDots();
+    update();
+  });
+
+  // init
+  setTimeout(function(){ rebuildDots(); update(); resetTimer(); }, 120);
+})();
+</script>
+</body>
+</html>
